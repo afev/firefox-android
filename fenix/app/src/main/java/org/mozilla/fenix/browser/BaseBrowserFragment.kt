@@ -71,6 +71,7 @@ import mozilla.components.concept.storage.LoginEntry
 import mozilla.components.feature.accounts.FxaCapability
 import mozilla.components.feature.accounts.FxaWebChannelFeature
 import mozilla.components.feature.app.links.AppLinksFeature
+import mozilla.components.feature.cades.plugin.CAdESPluginFeature
 import mozilla.components.feature.contextmenu.ContextMenuCandidate
 import mozilla.components.feature.contextmenu.ContextMenuFeature
 import mozilla.components.feature.downloads.DownloadsFeature
@@ -251,6 +252,7 @@ abstract class BaseBrowserFragment :
     private val screenOrientationFeature = ViewBoundFeatureWrapper<ScreenOrientationFeature>()
     private val biometricPromptFeature = ViewBoundFeatureWrapper<BiometricPromptFeature>()
     private val crashContentIntegration = ViewBoundFeatureWrapper<CrashContentIntegration>()
+    private val cAdESPluginIntegration = ViewBoundFeatureWrapper<CAdESPluginFeature>()
     private var pipFeature: PictureInPictureFeature? = null
 
     var customTabSessionId: String? = null
@@ -1068,6 +1070,17 @@ abstract class BaseBrowserFragment :
         initializeEngineView(
             topToolbarHeight = context.settings().getTopToolbarHeight(),
             bottomToolbarHeight = bottomToolbarHeight,
+        )
+
+        cAdESPluginIntegration.set(
+            feature = CAdESPluginFeature(
+                requireActivity(),
+                customTabSessionId,
+                requireComponents.core.engine,
+                requireComponents.core.store,
+                ),
+            owner = this,
+            view = view,
         )
     }
 
