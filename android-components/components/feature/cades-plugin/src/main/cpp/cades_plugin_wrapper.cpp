@@ -70,7 +70,7 @@ end:
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_mozilla_components_feature_cades_plugin_wrapper_JniWrapper_close(JNIEnv *env, jclass clazz) {
+Java_mozilla_components_feature_cades_plugin_wrapper_JniWrapper_close(JNIEnv *env, jclass clazz, jstring jPath) {
     if (fd_in) {
         close(fd_in);
         fd_in = 0;
