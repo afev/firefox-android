@@ -1075,7 +1075,6 @@ abstract class BaseBrowserFragment :
         cAdESPluginIntegration.set(
             feature = CAdESPluginFeature(
                 requireActivity(),
-                customTabSessionId,
                 requireComponents.core.engine,
                 requireComponents.core.store,
                 ),
